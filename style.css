@@ -1,55 +1,43 @@
 /* Aurora: do not remove — visual background layer */
-/* === Vibrant Aurora Background === */
+/* === Aurora background (paste this at the top of style.css) === */
 :root{
-  --aurora-color1: #DC143C;  /* Deep Red */
-  --aurora-color2: #8B008B;  /* Dark Magenta */
-  --aurora-color3: #4B0082;  /* Indigo */
-  --aurora-color4: #191970;  /* Midnight Blue */
-  --aurora-speed: 20s;
-  --aurora-blur: 80px;
+  --color1: #3A29FF;
+  --color2: #FF94B4;
+  --color3: #FF3232;
+  --speed: 15s;
+  --blend: screen;
+  --amplitude: 120px;
 }
 
-/* Fullscreen aurora container */
+/* Fullscreen aurora layer (behind content) */
 .aurora-container {
   position: fixed;
-  inset: 0;
-  pointer-events: none;
+  inset: 0;                 /* top:0; right:0; bottom:0; left:0; */
+  pointer-events: none;     /* content remains interactive */
   z-index: 0;
-  overflow: hidden;
 }
 
-/* Multiple aurora layers for depth */
+/* Animated glow layers using pseudo-elements */
 .aurora-container::before,
 .aurora-container::after {
   content: "";
   position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  opacity: 0.8;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%,
+              var(--color1), var(--color2), var(--color3), transparent 70%);
+  filter: blur(var(--amplitude));
+  mix-blend-mode: var(--blend);
+  opacity: 0.6;
+  animation: auroraMove var(--speed) infinite linear;
   z-index: 0;
 }
 
-/* First aurora layer - Red to Purple gradient */
-.aurora-container::before {
-  background: 
-    radial-gradient(ellipse 800px 600px at 20% 30%, var(--aurora-color1) 0%, transparent 50%),
-    radial-gradient(ellipse 1000px 800px at 80% 70%, var(--aurora-color2) 0%, transparent 50%),
-    radial-gradient(ellipse 600px 400px at 60% 20%, var(--aurora-color3) 0%, transparent 50%);
-  filter: blur(var(--aurora-blur));
-  animation: auroraFlow var(--aurora-speed) ease-in-out infinite;
-}
-
-/* Second aurora layer - Purple to Blue gradient */
 .aurora-container::after {
-  background: 
-    radial-gradient(ellipse 900px 700px at 70% 80%, var(--aurora-color2) 0%, transparent 50%),
-    radial-gradient(ellipse 700px 500px at 30% 60%, var(--aurora-color3) 0%, transparent 50%),
-    radial-gradient(ellipse 800px 600px at 90% 40%, var(--aurora-color4) 0%, transparent 50%);
-  filter: blur(calc(var(--aurora-blur) * 1.2));
-  animation: auroraFlow var(--aurora-speed) ease-in-out infinite reverse;
-  animation-delay: -10s;
+  animation-direction: reverse;
+  animation-duration: calc(var(--speed) * 1.3);
 }
 
 /* Keep all page content above the aurora */
@@ -58,24 +46,10 @@ body > *:not(.aurora-container) {
   z-index: 1;
 }
 
-/* Smooth flowing aurora animation */
-@keyframes auroraFlow {
-  0%, 100% { 
-    transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(1); 
-    opacity: 0.7;
-  }
-  25% { 
-    transform: translateX(-40%) translateY(-60%) rotate(90deg) scale(1.1); 
-    opacity: 0.9;
-  }
-  50% { 
-    transform: translateX(-60%) translateY(-40%) rotate(180deg) scale(1.2); 
-    opacity: 0.8;
-  }
-  75% { 
-    transform: translateX(-45%) translateY(-55%) rotate(270deg) scale(1.05); 
-    opacity: 0.85;
-  }
+@keyframes auroraMove {
+  0%   { transform: translate(-25%, -25%) rotate(0deg); }
+  50%  { transform: translate(25%, 25%) rotate(180deg); }
+  100% { transform: translate(-25%, -25%) rotate(360deg); }
 }
 
 * {
@@ -111,15 +85,12 @@ body > *:not(.aurora-container) {
 }
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: transparent; /* allow aurora to show */
-  color: #fff;
-  position: relative;
-  z-index: 1;
+  margin: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding-bottom: 40px;
 }
-
 
 /* Top bar */
 header {
@@ -127,9 +98,8 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 15px 30px;
-  background: rgba(28, 0, 51, 0.75);
-  backdrop-filter: blur(8px);
-  z-index: 2;
+  background: rgba(30, 30, 47, 0.95);
+  backdrop-filter: blur(10px);
   color: white;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   position: sticky;
@@ -232,7 +202,7 @@ select option {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: rgba(106, 76, 179, 0.6);
+  background: rgba(255,255,255,0.1);
   backdrop-filter: blur(10px);
   color: white;
   gap: 25px;
@@ -280,8 +250,6 @@ select option {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  background: rgba(20, 20, 40, 0.4);
-  backdrop-filter: blur(6px);
   gap: 25px;
   padding: 30px;
   max-width: 1400px;
@@ -293,8 +261,7 @@ select option {
   position: relative;
   border-radius: 17px;
   padding: 2px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background: linear-gradient(45deg, #f44369, #3e3b92);
   display: flex;
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
