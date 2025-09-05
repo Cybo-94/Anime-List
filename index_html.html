@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CYBO • Watched Shows</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo-section">
+    <div class="logo">CYBO</div>
+    <div class="title">Watched Shows <span class="beta-tag">Beta</span></div>
+  </div>
+  <div class="controls">
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Search shows...">
+    </div>
+    <select id="sort">
+      <option value="name">Sort by Name</option>
+      <option value="date">Sort by Date</option>
+      <option value="rating">Sort by Rating</option>
+      <option value="genre">Sort by Genre</option>
+    </select>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-number" id="totalShows">0</div>
+    <div class="stat-label">Total Shows</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number" id="avgRating">0</div>
+    <div class="stat-label">Avg Rating</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number" id="topGenre">-</div>
+    <div class="stat-label">Top Genre</div>
+  </div>
+  <div class="stat feature-stat">
+    <div class="feature-name" id="favoriteCharacter">Luffy</div>
+    <div class="feature-details">One piece</div>
+    <div class="stat-label">Favorite Character</div>
+  </div>
+  <div class="stat feature-stat">
+    <div class="feature-name" id="currentlyWatching">Dan Da Dan</div>
+    <div class="feature-details">On episode: <span id="currentEpisode">8</span></div>
+    <div class="stat-label">Currently Watching</div>
+  </div>
+</div>
+
+<div class="grid" id="showsGrid">
+  <!-- Cards will be injected here dynamically -->
+</div>
+
+<script>
+const shows = [
+  {
+    poster: "https://cdn.noitatnemucod.net/thumbnail/300x400/100/bcd84731a3eda4f4a306250769675065.jpg",
+    name: "One Piece",
+    date: "Oct 20, 1999 - Ongoing",
+    genre: "Drama, Action, Adventure, Comedy, Fantasy, Shounen",
+    rating: 5,
+    link: "https://hianime.to/one-piece-100"
+  },
+  {
+    poster: "https://i.postimg.cc/qRxWxnjR/30df93feaa422101659e14d0a2a2f582.jpg",
+    name: "Demon Slayer",
+    date: "Apr 6, 2019 - Ongoing",
+    genre: "Action, Demons, Historical, Shounen, Supernatural",
+    rating: 4,
+    link: "https://hianime.to/demon-slayer-kimetsu-no-yaiba-47"
+  },
+  {
+    poster: "https://i.postimg.cc/jjgyFVbP/54d3f59bcc7caf1539c701eb0a064ec9.png",
+    name: "Attack on Titan",
+    date: " Apr 7, 2013 - Nov 5, 2023",
+    genre: "Action, Drama, Fantasy, Military, Shounen",
+    rating: 5,
+    link: "https://hianime.to/attack-on-titan-112"
+  },
+  {
+    poster: "https://i.postimg.cc/nz2g5hLT/65f92e6e315a931ef872da4b312442b8.jpg",
+    name: "Solo Leveling",
+    date: " Jan 7, 2024 - Ongoing",
+    genre: "Action, Adventure, Fantasy",
+    rating: 5,
+    link: "https://hianime.to/solo-leveling-18718"
+  },
+  {
+    poster: "https://i.postimg.cc/j54Z530j/4303d95c719242ab6e459d477b0a8c08.jpg",
+    name: "Dan Da Dan",
+    date: "Oct 4, 2024 - Ongoing ",
+    genre: "Action, Comedy, Supernatural",
+    rating: 3,
+    link: "https://hianime.to/dan-da-dan-19319"
+  },
+  {
+    poster: "https://i.postimg.cc/vBrSnH9b/9cbcf87f54194742e7686119089478f8.jpg",
+    name: "Naruto Shippuden",
+    date: "Feb 15, 2007 - Mar 23, 2017",
+    genre: "Action, Adventure, Comedy, Martial, Arts, Shounen, Super Power",
+    rating: 3,
+    link: "https://hianime.to/naruto-shippuden-355"
+  },
+   {
+    poster: "https://i.postimg.cc/TwVx6VCd/88d7186ebed8856c731b2dd132aaf68a.jpg",
+    name: "Suzume's Locking-Up",
+    date: "Nov 11, 2022",
+    genre: "Mystery, Fantasy, Sci-Fi",
+    rating: 2.5,
+    link: "https://hianime.to/suzumes-doorlocking-18190"
+  },
+  {
+    poster: "https://i.postimg.cc/gJFpQSyt/16eec56baf8f3fcc6430607f58ce3d12.jpg",
+    name: "Your Name",
+    date: "Aug 26, 2016",
+    genre: "Drama, Romance, School, Supernatural",
+    rating: 4.5,
+    link: "https://hianime.to/your-name-10"
+  },
+  {
+    poster: "https://i.postimg.cc/SKKYjKwb/5e61f3e7c0045e46b670d31a5bb39c68.jpg",
+    name: "Death Note",
+    date: "Oct 4, 2006 to Jun 27, 2007",
+    genre: "Mystery, Shounen, Supernatural, Police, Psychological, Thriller",
+    rating: 3,
+    link: "https://hianime.to/death-note-60"
+  },
+  {
+    poster: "https://i.postimg.cc/L6ftMnMy/download.jpg",
+    name: "Pokemon",
+    date: "April 1, 1997 - Ongoing",
+    genre: "Adventure, Action, Comedy, Fantasy",
+    rating: 4,
+    link: "https://hianime.to/search?keyword=pokemon"
+  },
+  {
+    poster: "https://i.postimg.cc/XJmsQmwX/37eb9509a2ae0010f64b0170a03b5a13.jpg",
+    name: "Weathering With You",
+    date: " Jul 19, 2019",
+    genre: "Drama, Fantasy, Romance, Slice of Life",
+    rating: 3,
+    link: "https://hianime.to/watch/weathering-with-you-111?ep=71785&c_id=7765688&c_type=episode"
+  },
+ 
+];
+
+// Configuration for new features - EDIT THESE VALUES
+const userPreferences = {
+  favoriteCharacter: "Sung Jinwoo",
+  favoriteCharacterShow: "Solo leveling",
+  currentlyWatching: "One Piece",
+  currentEpisode: 130
+};
+
+// Advanced algorithms for data processing
+class ShowsManager {
+  constructor(shows) {
+    this.shows = shows;
+    this.filteredShows = shows;
+    this.currentSort = 'name';
+    this.searchQuery = '';
+  }
+  
+  // Optimized search algorithm using multiple criteria
+  search(query) {
+    this.searchQuery = query.toLowerCase().trim();
+    
+    if (!this.searchQuery) {
+      this.filteredShows = this.shows;
+      return this.filteredShows;
+    }
+    
+    // Multi-field fuzzy search algorithm
+    this.filteredShows = this.shows.filter(show => {
+      const nameMatch = show.name.toLowerCase().includes(this.searchQuery);
+      const genreMatch = show.genre.toLowerCase().includes(this.searchQuery);
+      const dateMatch = show.date.toLowerCase().includes(this.searchQuery);
+      
+      // Weighted scoring system
+      let score = 0;
+      if (nameMatch) score += 3; // Name has highest weight
+      if (genreMatch) score += 2; // Genre has medium weight  
+      if (dateMatch) score += 1; // Date has lowest weight
+      
+      return score > 0;
+    });
+    
+    return this.filteredShows;
+  }
+  
+  // Enhanced sorting algorithm with multiple criteria
+  sort(criteria) {
+    this.currentSort = criteria;
+    
+    const sortAlgorithms = {
+      name: (a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }),
+      
+      date: (a, b) => {
+        // Advanced date parsing algorithm
+        const parseDate = (dateStr) => {
+          if (dateStr.includes('Ongoing')) {
+            return new Date(); // Ongoing shows get current date for sorting
+          }
+          
+          const startDate = dateStr.split(' - ')[0];
+          const parts = startDate.split(' ');
+          
+          if (parts.length >= 3) {
+            const month = this.getMonthNumber(parts[0]);
+            const day = parseInt(parts[1].replace(',', ''));
+            const year = parseInt(parts[2]);
+            
+            return new Date(year, month - 1, day);
+          }
+          
+          return new Date(0); // Fallback date
+        };
+        
+        return parseDate(b.date) - parseDate(a.date); // Most recent first
+      },
+      
+      rating: (a, b) => b.rating - a.rating || a.name.localeCompare(b.name), // Secondary sort by name
+      
+      genre: (a, b) => {
+        const primaryGenreA = a.genre.split(',')[0].trim();
+        const primaryGenreB = b.genre.split(',')[0].trim();
+        return primaryGenreA.localeCompare(primaryGenreB) || a.name.localeCompare(b.name);
+      }
+    };
+    
+    this.filteredShows.sort(sortAlgorithms[criteria] || sortAlgorithms.name);
+    return this.filteredShows;
+  }
+  
+  // Helper method for month name to number conversion
+  getMonthNumber(monthName) {
+    const months = {
+      'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,
+      'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12
+    };
+    return months[monthName.toLowerCase().substr(0, 3)] || 1;
+  }
+  
+  // Statistics calculation algorithms
+  calculateStats() {
+    const totalShows = this.shows.length;
+    
+    const avgRating = totalShows > 0 
+      ? (this.shows.reduce((sum, show) => sum + show.rating, 0) / totalShows).toFixed(1)
+      : '0';
+    
+    // Genre frequency analysis
+    const genreCount = {};
+    this.shows.forEach(show => {
+      show.genre.split(',').forEach(genre => {
+        const cleanGenre = genre.trim();
+        genreCount[cleanGenre] = (genreCount[cleanGenre] || 0) + 1;
+      });
+    });
+    
+    const topGenre = Object.keys(genreCount).length > 0
+      ? Object.keys(genreCount).reduce((a, b) => genreCount[a] > genreCount[b] ? a : b)
+      : '-';
+    
+    return { totalShows, avgRating, topGenre };
+  }
+}
+
+// Initialize shows manager
+const showsManager = new ShowsManager(shows);
+
+// DOM manipulation and rendering algorithms
+function renderShows(showList) {
+  const grid = document.getElementById('showsGrid');
+  
+  if (showList.length === 0) {
+    grid.innerHTML = '<div class="no-results">No shows found matching your search 🔍</div>';
+    return;
+  }
+  
+  // Efficient DOM creation using DocumentFragment
+  const fragment = document.createDocumentFragment();
+  
+  showList.forEach(show => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    
+    // Generate genre tags
+    const genreTags = show.genre.split(',')
+      .map(genre => `<span class="genre-tag">${genre.trim()}</span>`)
+      .join('');
+    
+    // Generate star rating
+    const fullStars = Math.floor(show.rating);
+    const hasHalfStar = show.rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    
+    const starsHTML = '★'.repeat(fullStars) + 
+                      (hasHalfStar ? '½' : '') + 
+                      '☆'.repeat(emptyStars);
+    
+    card.innerHTML = `
+      <div class="card-inner">
+        <img src="${show.poster}" alt="${show.name} Poster" onerror="this.src='https://via.placeholder.com/300x400/666/white?text=No+Image'">
+        <div class="card-content">
+          <h3>${show.name}</h3>
+          <div class="card-info">
+            <p><span class="icon">📅</span> ${show.date}</p>
+            <p><span class="icon">🎭</span> Genres:</p>
+            <div class="genre-tags">${genreTags}</div>
+          </div>
+          <div class="rating-section">
+            <div>
+              <div style="font-size: 0.9em; color: #aaa; margin-bottom: 3px;">CYBO Rating</div>
+              <span class="stars">${starsHTML}</span>
+            </div>
+            ${show.link ? `<button class="watch-btn" onclick="window.open('${show.link}', '_blank')">Watch Now</button>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+    
+    fragment.appendChild(card);
+  });
+  
+  grid.innerHTML = '';
+  grid.appendChild(fragment);
+}
+
+// Update statistics display
+function updateStats() {
+  const stats = showsManager.calculateStats();
+  document.getElementById('totalShows').textContent = stats.totalShows;
+  document.getElementById('avgRating').textContent = stats.avgRating;
+  document.getElementById('topGenre').textContent = stats.topGenre;
+}
+
+// Update user preferences display
+function updateUserPreferences() {
+  document.getElementById('favoriteCharacter').textContent = userPreferences.favoriteCharacter;
+  document.querySelector('.feature-stat:nth-of-type(4) .feature-details').textContent = `from ${userPreferences.favoriteCharacterShow}`;
+  
+  document.getElementById('currentlyWatching').textContent = userPreferences.currentlyWatching;
+  document.getElementById('currentEpisode').textContent = userPreferences.currentEpisode;
+}
+
+// Function to update user preferences (you can call this to change values)
+function setUserPreferences(character, characterShow, watchingShow, episode) {
+  userPreferences.favoriteCharacter = character;
+  userPreferences.favoriteCharacterShow = characterShow;
+  userPreferences.currentlyWatching = watchingShow;
+  userPreferences.currentEpisode = episode;
+  updateUserPreferences();
+}
+
+// Debounced search for performance optimization
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+const debouncedSearch = debounce((query) => {
+  const filtered = showsManager.search(query);
+  const sorted = showsManager.sort(showsManager.currentSort);
+  renderShows(sorted);
+}, 300);
+
+// Event listeners
+document.getElementById('search').addEventListener('input', (e) => {
+  debouncedSearch(e.target.value);
+});
+
+document.getElementById('sort').addEventListener('change', (e) => {
+  const sorted = showsManager.sort(e.target.value);
+  renderShows(sorted);
+});
+
+// Initial render
+renderShows(showsManager.shows);
+updateStats();
+updateUserPreferences();
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.key === 'f') {
+    e.preventDefault();
+    document.getElementById('search').focus();
+  }
+});
+
+// Example function to demonstrate how to update preferences
+// You can call this in the browser console or create buttons to trigger it
+console.log('To update preferences, use: setUserPreferences("CharacterName", "ShowName", "CurrentShow", EpisodeNumber)');
+console.log('Example: setUserPreferences("Goku", "Dragon Ball Z", "Jujutsu Kaisen", 15)');
+</script>
+
+<div class="footer">
+  <p>
+    Coolest Young Brain Online 🌐🧠<br />
+    Crafted in India with ❤️, and a curious mind.<br />
+    Contact:
+    <a href="mailto:cybo.buisness@gmail.com" style="color: #00faff; text-decoration: none">
+      cybo.buisness@gmail.com
+    </a><br /><br />
+    © 2025 CYBO. All rights reserved.
+  </p>
+</div>
+</body>
+</html>
