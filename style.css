@@ -111,12 +111,15 @@ body > *:not(.aurora-container) {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  padding-bottom: 40px;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: transparent; /* allow aurora to show */
+  color: #fff;
+  position: relative;
+  z-index: 1;
 }
+
 
 /* Top bar */
 header {
@@ -124,8 +127,9 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 15px 30px;
-  background: rgba(30, 30, 47, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(28, 0, 51, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 2;
   color: white;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   position: sticky;
@@ -228,7 +232,7 @@ select option {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(106, 76, 179, 0.6);
   backdrop-filter: blur(10px);
   color: white;
   gap: 25px;
@@ -276,6 +280,8 @@ select option {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  background: rgba(20, 20, 40, 0.4);
+  backdrop-filter: blur(6px);
   gap: 25px;
   padding: 30px;
   max-width: 1400px;
@@ -287,7 +293,8 @@ select option {
   position: relative;
   border-radius: 17px;
   padding: 2px;
-  background: linear-gradient(45deg, #f44369, #3e3b92);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
