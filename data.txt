@@ -1,0 +1,96 @@
+{
+    poster: "https://cdn.noitatnemucod.net/thumbnail/300x400/100/bcd84731a3eda4f4a306250769675065.jpg",
+    name: "One Piece",
+    date: "Oct 20, 1999 - Ongoing",
+    genre: "Drama, Action, Adventure, Comedy, Fantasy, Shounen",
+    rating: 5,
+    link: "https://hianime.to/one-piece-100"
+  },
+  {
+    poster: "https://i.postimg.cc/qRxWxnjR/30df93feaa422101659e14d0a2a2f582.jpg",
+    name: "Demon Slayer",
+    date: "Apr 6, 2019 - Ongoing",
+    genre: "Action, Demons, Historical, Shounen, Supernatural",
+    rating: 4,
+    link: "https://hianime.to/demon-slayer-kimetsu-no-yaiba-47"
+  },
+  {
+    poster: "https://i.postimg.cc/jjgyFVbP/54d3f59bcc7caf1539c701eb0a064ec9.png",
+    name: "Attack on Titan",
+    date: " Apr 7, 2013 - Nov 5, 2023",
+    genre: "Action, Drama, Fantasy, Military, Shounen",
+    rating: 5,
+    link: "https://hianime.to/attack-on-titan-112"
+  },
+  {
+    poster: "https://i.postimg.cc/nz2g5hLT/65f92e6e315a931ef872da4b312442b8.jpg",
+    name: "Solo Leveling",
+    date: " Jan 7, 2024 - Ongoing",
+    genre: "Action, Adventure, Fantasy",
+    rating: 5,
+    link: "https://hianime.to/solo-leveling-18718"
+  },
+  {
+    poster: "https://i.postimg.cc/j54Z530j/4303d95c719242ab6e459d477b0a8c08.jpg",
+    name: "Dan Da Dan",
+    date: "Oct 4, 2024 - Ongoing ",
+    genre: "Action, Comedy, Supernatural",
+    rating: 3,
+    link: "https://hianime.to/dan-da-dan-19319"
+  },
+  {
+    poster: "https://i.postimg.cc/vBrSnH9b/9cbcf87f54194742e7686119089478f8.jpg",
+    name: "Naruto Shippuden",
+    date: "Feb 15, 2007 - Mar 23, 2017",
+    genre: "Action, Adventure, Comedy, Martial, Arts, Shounen, Super Power",
+    rating: 3,
+    link: "https://hianime.to/naruto-shippuden-355"
+  },
+   {
+    poster: "https://i.postimg.cc/TwVx6VCd/88d7186ebed8856c731b2dd132aaf68a.jpg",
+    name: "Suzume's Locking-Up",
+    date: "Nov 11, 2022",
+    genre: "Mystery, Fantasy, Sci-Fi",
+    rating: 2.5,
+    link: "https://hianime.to/suzumes-doorlocking-18190"
+  },
+  {
+    poster: "https://i.postimg.cc/gJFpQSyt/16eec56baf8f3fcc6430607f58ce3d12.jpg",
+    name: "Your Name",
+    date: "Aug 26, 2016",
+    genre: "Drama, Romance, School, Supernatural",
+    rating: 4.5,
+    link: "https://hianime.to/your-name-10"
+  },
+  {
+    poster: "https://i.postimg.cc/SKKYjKwb/5e61f3e7c0045e46b670d31a5bb39c68.jpg",
+    name: "Death Note",
+    date: "Oct 4, 2006 to Jun 27, 2007",
+    genre: "Mystery, Shounen, Supernatural, Police, Psychological, Thriller",
+    rating: 3,
+    link: "https://hianime.to/death-note-60"
+  },
+  {
+    poster: "https://i.postimg.cc/L6ftMnMy/download.jpg",
+    name: "Pokemon",
+    date: "April 1, 1997 - Ongoing",
+    genre: "Adventure, Action, Comedy, Fantasy",
+    rating: 4,
+    link: "https://hianime.to/search?keyword=pokemon"
+  },
+  {
+    poster: "https://i.postimg.cc/XJmsQmwX/37eb9509a2ae0010f64b0170a03b5a13.jpg",
+    name: "Weathering With You",
+    date: " Jul 19, 2019",
+    genre: "Drama, Fantasy, Romance, Slice of Life",
+    rating: 3,
+    link: "https://hianime.to/watch/weathering-with-you-111?ep=71785&c_id=7765688&c_type=episode"
+  },
+  {
+    poster: "https://cdn.noitatnemucod.net/thumbnail/300x400/100/3ffea3f5837c00ca78848fde8e7c8277.jpg",
+    name: "The Tunnel to summer, the exit of Goodbye",
+    date: "Sep 9, 2022",
+    genre: "Mystery, Drama, Sci-Fi",
+    rating: 0,
+    link: "https://hianime.to/the-tunnel-to-summer-the-exit-of-goodbye-18393"
+  },
